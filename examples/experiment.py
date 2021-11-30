@@ -4,10 +4,12 @@
 # Libraries
 ###############################################################################
 import sys
-from decouple import config as d_config
+import logging
 from azureml.core import Workspace
 from azureml.core import Experiment
+from decouple import config as d_config
 
+logging.basicConfig(level=logging.INFO)
 
 ###############################################################################
 # Paths
@@ -38,6 +40,10 @@ def test_experiment(my_workspace: Workspace):
     var_1 = 1
     var_2 = 2
     var_3 = var_1 * var_2
+
+    # Logging
+    logging.info(f'Solution => {var_3}')
+    run.log(name='solution', value=var_3)
 
     # End Experiment
     run.complete()
